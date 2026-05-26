@@ -1,0 +1,6 @@
+Hola {{ user.get_full_name}},
+
+Tu orden #{{ order.id}} Ha sido pagado con exito el {{order.paid_at|date:"d/m/y H:1"}}.
+Total: ${{order.total_amount}} MXN.
+
+¡Gracias por elegirnos!

@@ -75,18 +75,23 @@ WSGI_APPLICATION = 'cine.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+
+
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cine',
-        'USER': 'root',  # o el usuario que uses
-        'PASSWORD': '',  # por defecto en XAMPP es vacío
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-        'OPTIONS': {
-        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        },
-    }
+     'default': {
+         'ENGINE': 'django.db.backends.mysql',
+         'NAME': 'cine',
+         'USER': 'root',  # o el usuario que uses
+         'PASSWORD': '',  # por defecto en XAMPP es vacío
+         'HOST': '127.0.0.1',
+         'PORT': '3306',
+         'CONN_MAX_AGE': 0,
+         'OPTIONS': {
+         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+         },
+     }
 }
 
 
@@ -114,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'America/Mexico_City'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
@@ -141,4 +146,25 @@ LOGIN_URL          = 'login'
 LOGIN_REDIRECT_URL = 'home'    # o donde quieras llevar al usuario tras entrar
 LOGOUT_REDIRECT_URL= 'home'   # tras cerrar sesión
 
+EMAIL_BACKEND = "cine.mail_backends.DevSMTPBackend"
+EMAIL_HOST ="smtp.gmail.com"
+EMAIL_USE_TLS =True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "yedythguadalupesanchezzaldivar@gmail.com"
+EMAIL_HOST_PASSWORD= "nmulyipoxocrhwyt"
 
+# Truco para ignorar la restricción de versión de MariaDB
+# ==============================================================================
+# TRUCOS DE COMPATIBILIDAD PARA MARIADB VIEJO (XAMPP 10.4)
+# ==============================================================================
+from django.db.backends.base.base import BaseDatabaseWrapper
+from django.db.backends.mysql.features import DatabaseFeatures
+
+# 1. Ignorar la restricción estricta de la versión de la base de datos
+BaseDatabaseWrapper.check_database_version_supported = lambda self: None
+
+# 2. Desactivar RETURNING para inserciones masivas (Bulk Inserts del Admin)
+DatabaseFeatures.can_return_rows_from_bulk_insert = property(lambda self: False)
+
+# 3. Desactivar RETURNING para inserciones normales (.save() de tus asientos)
+DatabaseFeatures.can_return_columns_from_insert = property(lambda self: False)

@@ -1,102 +1,694 @@
-{% extends "baseHome.html" %}
+{% extends "baseHome.html" %} 
 {% load static %}
-{% block title %}CineDelBienestar{% endblock %}
-
+{% block title %}CinedelBienestar· — Cartelera y Snacks{% endblock %}
 
 {% block content %}
+<style>
+  /* Tema moderno para daltonismo */
+  :root {
+    --primary-red: #ff3b30;
+    --dark-red: #cc0000;
+    --accent-red: #ff6b6b;
+    --bg-dark: #0a0a0a;
+    --bg-card: #1a1a1a;
+    --bg-secondary: #2a2a2a;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --border-color: #333333;
+  }
+
+  body {
+    background: linear-gradient(135deg, var(--bg-dark) 0%, #1a1a1a 100%);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Partículas de fondo animadas */
+  .particles-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, var(--primary-red), transparent);
+    border-radius: 50%;
+    animation: float 20s infinite linear;
+    opacity: 0.3;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.3;
+    }
+    90% {
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateY(-100px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  /* Efectos de neón y brillo */
+  .neon-glow {
+    text-shadow: none;
+  }
+
+  .modern-hero {
+    background: linear-gradient(135deg, #1a0a0a 0%, #2d1b1b 50%, #1a0a0a 100%);
+    border: none;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+      0 20px 40px rgba(255, 59, 48, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .modern-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 59, 48, 0.05) 50%, transparent 70%);
+    pointer-events: none;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+  }
+
+  .modern-hero h1 {
+    background: linear-gradient(45deg, var(--primary-red), var(--accent-red), #ff9999);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+    text-shadow: 0 0 30px rgba(255, 59, 48, 0.3);
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { 
+      filter: drop-shadow(0 0 10px rgba(255, 59, 48, 0.5));
+    }
+    50% { 
+      filter: drop-shadow(0 0 20px rgba(255, 59, 48, 0.8));
+    }
+  }
+
+  .modern-btn {
+    background: linear-gradient(45deg, var(--primary-red), var(--dark-red));
+    border: none;
+    border-radius: 50px;
+    padding: 12px 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 
+      0 8px 25px rgba(255, 59, 48, 0.3),
+      0 0 0 2px rgba(255, 59, 48, 0.1);
+    position: relative;
+    overflow: hidden;
+    animation: buttonPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes buttonPulse {
+    0%, 100% { 
+      transform: scale(1);
+      box-shadow: 0 8px 25px rgba(255, 59, 48, 0.3), 0 0 0 2px rgba(255, 59, 48, 0.1);
+    }
+    50% { 
+      transform: scale(1.02);
+      box-shadow: 0 12px 30px rgba(255, 59, 48, 0.4), 0 0 0 3px rgba(255, 59, 48, 0.2);
+    }
+  }
+
+  .modern-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+    animation: slideShine 3s ease-in-out infinite;
+  }
+
+  @keyframes slideShine {
+    0%, 100% { left: -100%; }
+    50% { left: 100%; }
+  }
+
+  .modern-btn:hover::before {
+    left: 100%;
+    animation: none;
+  }
+
+  .modern-btn:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 
+      0 15px 35px rgba(255, 59, 48, 0.4),
+      0 0 0 3px rgba(255, 59, 48, 0.2);
+    animation: buttonBounce 0.6s ease-in-out infinite;
+  }
+
+  @keyframes buttonBounce {
+    0%, 100% { transform: translateY(-2px) scale(1.05); }
+    50% { transform: translateY(-4px) scale(1.08); }
+  }
+
+  /* MODIFICACIÓN: Sin fondo ni borde ni margen interno */
+  .modern-card {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    transition: transform 0.3s ease, filter 0.3s ease !important;
+    overflow: visible !important;
+    position: relative;
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  /* Efecto de hover mejorado */
+  .modern-card:hover {
+    transform: translateY(-10px) scale(1.02) !important;
+    filter: brightness(1.1) !important;
+  }
+
+  .modern-card img {
+    transition: transform 0.3s ease, filter 0.3s ease !important;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .modern-card:hover img {
+    transform: scale(1.05) !important;
+    filter: brightness(1.2) saturate(1.1) !important;
+    box-shadow: 0 20px 40px rgba(255, 59, 48, 0.2);
+  }
+
+  .modern-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    position: relative;
+    display: inline-block;
+    animation: slideInFromLeft 1s ease-out;
+  }
+
+  .modern-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-red), var(--accent-red));
+    border-radius: 2px;
+    animation: expandWidth 1s ease-out 0.5s both;
+  }
+
+  @keyframes expandWidth {
+    from { width: 0; }
+    to { width: 60px; }
+  }
+
+  @keyframes slideInFromLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .modern-title i {
+    color: var(--primary-red);
+    margin-right: 15px;
+    animation: rotate 2s ease-in-out infinite;
+  }
+
+  @keyframes rotate {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(10deg); }
+  }
+
+  /* MODIFICACIÓN: Sin fondo ni borde ni margen interno */
+  .modern-snack-card {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    transition: transform 0.3s ease !important;
+    overflow: visible !important;
+    position: relative;
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  .modern-snack-card:hover {
+    transform: translateY(-5px) scale(1.05) !important;
+  }
+
+  .modern-snack-card img {
+    transition: transform 0.3s ease, filter 0.3s ease;
+    border-radius: 10px;
+  }
+
+  .modern-snack-card:hover img {
+    transform: scale(1.1) rotate(2deg);
+    filter: brightness(1.2) saturate(1.2);
+  }
+
+  .modern-btn-outline {
+    background: transparent;
+    border: 2px solid var(--primary-red);
+    color: var(--primary-red);
+    border-radius: 25px;
+    padding: 8px 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    animation: buttonOutlinePulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes buttonOutlinePulse {
+    0%, 100% { 
+      transform: scale(1);
+      border-color: var(--primary-red);
+    }
+    50% { 
+      transform: scale(1.03);
+      border-color: var(--accent-red);
+    }
+  }
+
+  .modern-btn-outline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-red);
+    transition: left 0.3s ease;
+    z-index: -1;
+  }
+
+  .modern-btn-outline::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+    z-index: -1;
+  }
+
+  .modern-btn-outline:hover::before {
+    left: 0;
+  }
+
+  .modern-btn-outline:hover::after {
+    width: 100%;
+    height: 100%;
+  }
+
+  .modern-btn-outline:hover {
+    color: white;
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 59, 48, 0.3);
+    animation: buttonOutlineShake 0.5s ease-in-out infinite;
+  }
+
+  @keyframes buttonOutlineShake {
+    0%, 100% { transform: translateY(-2px) scale(1.05) rotate(0deg); }
+    25% { transform: translateY(-2px) scale(1.05) rotate(1deg); }
+    75% { transform: translateY(-2px) scale(1.05) rotate(-1deg); }
+  }
+
+  .modern-alert {
+    background: linear-gradient(135deg, var(--bg-secondary), #2d1b1b);
+    border: 1px solid var(--primary-red);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 25px rgba(255, 59, 48, 0.1);
+    animation: fadeIn 1s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .price-tag {
+    background: linear-gradient(45deg, var(--primary-red), var(--accent-red));
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 700;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(255, 59, 48, 0.3);
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-5px); }
+    60% { transform: translateY(-3px); }
+  }
+
+  /* MODIFICACIÓN: Eliminar fondo y borde del card-body */
+  .card-body {
+    padding: 1.5rem;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+  }
+
+  .text-muted-modern {
+    color: var(--text-secondary) !important;
+    font-size: 0.9rem;
+  }
+
+  /* Animaciones mejoradas */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .modern-card:nth-child(1) { animation-delay: 0.1s; }
+  .modern-card:nth-child(2) { animation-delay: 0.2s; }
+  .modern-card:nth-child(3) { animation-delay: 0.3s; }
+  .modern-card:nth-child(4) { animation-delay: 0.4s; }
+  .modern-card:nth-child(5) { animation-delay: 0.5s; }
+
+  .modern-snack-card:nth-child(1) { animation-delay: 0.1s; }
+  .modern-snack-card:nth-child(2) { animation-delay: 0.2s; }
+  .modern-snack-card:nth-child(3) { animation-delay: 0.3s; }
+  .modern-snack-card:nth-child(4) { animation-delay: 0.4s; }
+  .modern-snack-card:nth-child(5) { animation-delay: 0.5s; }
+
+  /* Efectos de brillo mejorados */
+  .glow-effect {
+    box-shadow: 
+      0 0 20px rgba(255, 59, 48, 0.3),
+      0 0 40px rgba(255, 59, 48, 0.1),
+      0 0 80px rgba(255, 59, 48, 0.05);
+  }
+
+  /* Barras de progreso de carga */
+  .loading-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-red), var(--accent-red));
+    animation: loading 2s ease-in-out;
+    z-index: 9999;
+  }
+
+  @keyframes loading {
+    0% { width: 0%; }
+    50% { width: 70%; }
+    100% { width: 100%; opacity: 0; }
+  }
+
+  /* Efectos de glassmorphism - MODIFICADO: Sin efectos de vidrio */
+  .glass-effect {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border: none !important;
+  }
+
+  /* Hover effects en títulos */
+  .card-title {
+    transition: color 0.3s ease;
+  }
+
+  .modern-card:hover .card-title {
+    color: var(--primary-red) !important;
+    text-shadow: 0 0 10px rgba(255, 59, 48, 0.5);
+  }
+
+  /* Responsivo mejorado */
+  @media (max-width: 768px) {
+    .modern-hero {
+      border-radius: 15px;
+      margin: 0 10px;
+    }
+
+    .modern-title {
+      font-size: 2rem;
+    }
+
+    .particle {
+      width: 2px;
+      height: 2px;
+    }
+  }
+
+  /* CAMBIO PARA AUMENTAR TAMAÑO DE IMÁGENES DE CARTELERA */
+  .modern-card img.card-img-top {
+    height: auto !important;
+    max-height: 500px;
+    object-fit: contain !important;
+    width: 100%;
+  }
+
+  /* Efecto de ondas en el fondo */
+  .wave-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 59, 48, 0.02), transparent);
+    animation: wave 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes wave {
+    0%, 100% { transform: translateX(-100%); }
+    50% { transform: translateX(100%); }
+  }
+
+  /* Contador de popularidad */
+  .popularity-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(45deg, #ff6b6b, #ff3b30);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    z-index: 10;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  /* Efectos de luces de neón */
+  .neon-border {
+    border: 2px solid var(--primary-red);
+    box-shadow: 
+      0 0 5px var(--primary-red),
+      inset 0 0 5px var(--primary-red);
+    animation: neonGlow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes neonGlow {
+    from {
+      box-shadow: 
+        0 0 5px var(--primary-red),
+        inset 0 0 5px var(--primary-red);
+    }
+    to {
+      box-shadow: 
+        0 0 20px var(--primary-red),
+        inset 0 0 10px var(--primary-red);
+    }
+  }
+</style>
+
+<!-- Barra de carga -->
+<div class="loading-bar"></div>
+
+<!-- Partículas de fondo -->
+<div class="particles-bg">
+  <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+  <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+  <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+  <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
+  <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
+  <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
+  <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
+  <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
+  <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
+</div>
+
 <!-- ───────────── HERO ───────────── -->
-<div class="p-4 p-md-5 mb-4 bg-dark text-white rounded-3">
+<div class="p-4 p-md-5 mb-4 modern-hero text-white">
+ <div class="wave-bg"></div>
  <div class="col-lg-8 px-0">
    <h1 class="display-5"><i class="bi bi-popcorn me-2"></i>¡Bienvenido a Cine del Bienestar!</h1>
-   <p class="lead mb-4">Disfruta de las mejores películas y delicias recién hechas. Compra tus boletos y snacks en un par de clics.</p>
-   <a class="btn btn-primary btn-lg" href="#cartelera">Ver cartelera</a>
+   <p class="lead mb-4" style="font-size: 1.2rem; line-height: 1.6; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Disfruta de las mejores películas y delicias recién hechas. Compra tus boletos y snacks en un par de clics.</p>
+   <a class="btn modern-btn btn-lg glow-effect" href="#cartelera">Ver cartelera</a>
  </div>
 </div>
 
-
 <!-- ───────────── CARTELERA ───────────── -->
-<h2 id="cartelera" class="mb-3"><i class="bi bi-film"></i> Cartelera</h2>
-
+<h2 id="cartelera" class="modern-title"><i class="bi bi-film"></i>Cartelera</h2>
 
 {% if showtimes %}
- <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+ <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
    {% for st in showtimes %}
      <div class="col">
-       <div class="card h-100 shadow-sm">
-         {% if st.movie.poster %}
-           <img src="{{ st.movie.poster.url }}" class="card-img-top" alt="{{ st.movie }}">
-         {% else %}
-           <img src="{% static 'img/no-poster.svg' %}" class="card-img-top" alt="Sin póster">
-         {% endif %}
+       <div class="card h-100 modern-card">
+         <div style="overflow: hidden; border-radius: 15px 15px 0 0; position: relative;">
+           <div class="popularity-badge">
+             <i class="bi bi-star-fill me-1"></i>Popular
+           </div>
+           {% if st.movie.poster %}
+             <img src="{{ st.movie.poster.url }}" class="card-img-top" alt="{{ st.movie }}" style="height: 350px; object-fit: cover;">
+           {% else %}
+             <img src="{% static 'img/no-poster.svg' %}" class="card-img-top" alt="Sin póster" style="height: 350px; object-fit: cover;">
+           {% endif %}
+         </div>
          <div class="card-body d-flex flex-column">
-           <h5 class="card-title">{{ st.movie }}</h5>
-           <p class="card-text small text-muted mb-1">
-             {{ st.language }} · {{ st.format }} · {{ st.start_time|date:"d M H:i" }}
+           <h5 class="card-title" style="color: var(--accent-red); font-weight: 600;">{{ st.movie }}</h5>
+           <p class="card-text small text-muted-modern mb-2">
+             <i class="bi bi-translate me-1"></i>{{ st.language }} · 
+             <i class="bi bi-camera-reels me-1"></i>{{ st.format }} · 
+             <i class="bi bi-clock me-1"></i>{{ st.start_time|date:"d M H:i" }}
            </p>
-
-
-           <p class="card-text flex-grow-1">{{ st.movie.synopsis|truncatechars:120 }}</p>
-           <a href="{% url 'showtime_detail' st.id %}" class="btn btn-primary w-100 mt-auto">
-             Comprar boletos
+           <p class="card-text flex-grow-1" style="line-height: 1.5;">{{ st.movie.synopsis|truncatechars:120 }}</p>
+           <a href="{% url 'showtime_detail' st.id %}" class="btn modern-btn w-100 mt-auto">
+             <i class="bi bi-ticket-perforated me-2"></i>Comprar boletos
            </a>
-
-
          </div>
        </div>
      </div>
    {% endfor %}
  </div>
 {% else %}
- <div class="alert alert-info"><i class="bi bi-info-circle-fill me-1"></i> Aún no hay funciones programadas.</div>
+ <div class="modern-alert neon-border">
+   <i class="bi bi-info-circle-fill me-2" style="color: var(--primary-red);"></i>
+   <strong>Aún no hay funciones programadas.</strong> ¡Mantente atento a nuestras próximas proyecciones!
+ </div>
 {% endif %}
-
 
 <!-- ───────────── SNACKS DESTACADOS ───────────── -->
-<h2 class="mb-3"><i class="bi bi-cup-straw"></i> Snacks Destacados</h2>
-
+<h2 class="modern-title"><i class="bi bi-cup-straw"></i>Snacks Destacados</h2>
 
 {% if snacks %}
- <div class="row row-cols-2 row-cols-md-3 g-4">
+ <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4 mb-5">
    {% for s in snacks %}
      <div class="col">
-       <div class="card h-100 text-center shadow-sm">
-         {% if s.image %}
-           <img src="{{ s.image.url }}" class="card-img-top" style="height:180px; object-fit:cover;" alt="{{ s }}">
-         {% else %}
-           <img src="{% static 'img/no-snack.svg' %}" class="card-img-top" alt="Snack">
-         {% endif %}
-         <div class="card-body d-flex flex-column">
-           <h6 class="card-title">{{ s.name }}</h6>
-           <p class="card-text small text-muted">{{ s.category.name }}</p>
-           <p class="fw-bold mb-3">${{ s.price }}</p>
-           <a href="{% url 'snack_detail' s.id %}" class="btn btn-outline-light mt-auto">
-             Ver más
+       <div class="card h-100 text-center modern-snack-card">
+         <div style="position: relative;">
+           {% if s.image %}
+             <img src="{{ s.image.url }}" class="card-img-top" alt="{{ s }}" style="height: 100px; object-fit: contain;">
+           {% else %}
+             <img src="{% static 'img/no-snack.svg' %}" class="card-img-top" alt="Snack" style="height: 100px; object-fit: contain;">
+           {% endif %}
+         </div>
+         <div class="card-body d-flex flex-column p-3">
+           <h6 class="card-title mb-2" style="color: var(--text-primary); font-weight: 600;">{{ s.name }}</h6>
+           <p class="card-text small text-muted-modern mb-2">
+             <i class="bi bi-tag me-1"></i>{{ s.category.name }}
+           </p>
+           <div class="price-tag mb-3">${{ s.price }}</div>
+           <a href="{% url 'snack_detail' s.id %}" class="btn modern-btn-outline btn-sm mt-auto">
+             <i class="bi bi-eye me-1"></i>Ver más
            </a>
-
-
          </div>
        </div>
      </div>
    {% endfor %}
  </div>
- <div class="text-center mt-4">
-   <a href="{% url 'snack_list' %}" class="btn btn-secondary">
-     <i class="bi bi-cart3 me-1"></i> Ver todos los snacks
-   </a>
-
-
- </div>
 {% else %}
- <div class="alert alert-warning"><i class="bi bi-emoji-frown me-1"></i> No hay snacks disponibles.</div>
+ <div class="modern-alert neon-border">
+   <i class="bi bi-info-circle-fill me-2" style="color: var(--primary-red);"></i>
+   <strong>Aún no hay snacks disponibles.</strong> ¡Pronto tendremos deliciosas opciones para ti!
+ </div>
 {% endif %}
+
+<script>
+// Efecto de partículas dinámicas
+document.addEventListener('DOMContentLoaded', function() {
+  const particlesContainer = document.querySelector('.particles-bg');
+  
+  function createParticle() {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 20 + 's';
+    particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+    particlesContainer.appendChild(particle);
+    
+    setTimeout(() => {
+      particle.remove();
+    }, 25000);
+  }
+  
+  // Crear partículas continuamente
+  setInterval(createParticle, 3000);
+  
+  // Efecto de scroll suave
+  document.querySelector('a[href="#cartelera"]').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector('#cartelera').scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  });
+});
+</script>
+
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
