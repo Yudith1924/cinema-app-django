@@ -31,7 +31,7 @@ Sistema desarrollado para la administración de complejos cinematográficos, aut
 ### Funcionamiento de la Plataforma en Tiempo Real
 A continuación se muestra una demostración del flujo interactivo del sistema.
 
-<video src="https://github.com/user-attachments/assets/0b11145a-c22b-4339-93f1-e95115fd33a1" controls autoplay loop muted width="100%"></video>
+<video src="https://github.com/user-attachments/assets/7b0a3b36-5b40-4aa2-a148-9430067685da" controls autoplay loop muted width="100%"></video>
 
 ---
 
