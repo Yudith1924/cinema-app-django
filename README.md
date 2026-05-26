@@ -29,7 +29,7 @@ Sistema desarrollado para la administración de complejos cinematográficos, aut
 ## Demostración Visual
 
 ### Funcionamiento de la Plataforma en Tiempo Real
-A continuación se muestra una demostración del flujo interactivo del sistema, incluyendo la navegación por el panel de administración **Jazzmin**, la gestión del inventario de salas, dulcería y el flujo del cliente:
+A continuación se muestra una demostración del flujo interactivo del sistema.
 
 <video src="https://github.com/user-attachments/assets/0b11145a-c22b-4339-93f1-e95115fd33a1" controls autoplay loop muted width="100%"></video>
 
@@ -39,12 +39,12 @@ A continuación se muestra una demostración del flujo interactivo del sistema, 
 
 | Comprobante PDF de Entrada (Con QR) | Backoffice Administrativo (Jazzmin) |
 | :---: | :---: |
-| ![Ticket PDF Generado](https://github.com/user-attachments/assets/fdd7f344-f934-4c01-a2a9-5afaeaf77e16) | ![Panel de Control Administrativo](https://github.com/user-attachments/assets/f7e6f3e6-f4f0-4b66-8a43-d8084296e5aa) |
+| <img src="https://github.com/user-attachments/assets/fdd7f344-f934-4c01-a2a9-5afaeaf77e16" width="100%"/> | <img src="https://github.com/user-attachments/assets/f7e6f3e6-f4f0-4b66-8a43-d8084296e5aa" width="100%"/> |
 
 
 | Flujo de Experiencia del Cliente |
 | :---: |
-| **Cartelera de Películas**<br><img src="https://github.com/user-attachments/assets/f93e018e-d51d-4f88-be8a-aae30187cf1f" width="31%"/> &nbsp;&nbsp; **Selección de Asientos**<br><img src="https://github.com/user-attachments/assets/3749f884-fdd1-4f39-9fc3-da2e6ac0a626" width="31%"/> &nbsp;&nbsp; **Catálogo de Dulcería**<br><img src="https://github.com/user-attachments/assets/2327c77d-dd99-4f0d-9e7c-da120c4d553e" width="31%"/> |
+| <table border="0" width="100%"><tr><td align="center" width="33%"><b> Cartelera de Películas</b><br><br><img src="https://github.com/user-attachments/assets/f93e018e-d51d-4f88-be8a-aae30187cf1f" width="100%"/></td><td align="center" width="33%"><b> Selección de Asientos</b><br><br><img src="https://github.com/user-attachments/assets/3749f884-fdd1-4f39-9fc3-da2e6ac0a626" width="100%"/></td><td align="center" width="33%"><b> Catálogo de Dulcería</b><br><br><img src="https://github.com/user-attachments/assets/2327c77d-dd99-4f0d-9e7c-da120c4d553e" width="100%"/></td></tr></table> |
 
 ## Stack Tecnológico
 
