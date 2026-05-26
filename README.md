@@ -17,7 +17,8 @@ Sistema desarrollado para la administración de complejos cinematográficos, aut
 * **Integridad Transaccional y Anti-Sobreventa (`Ticket`):** Implementación de restricciones únicas a nivel base de datos mediante `unique_together = (('showtime', 'seat'),)` para mitigar de forma absoluta la colisión o duplicidad de boletos vendidos para una misma función.
 * **Módulo de Dulcería y Gestión de Combos (`SnackItem`):** Catálogo dinámico de productos y consumibles integrados con control estricto de disponibilidad y categorías.
 * **Flujo de Confirmación Directa de Órdenes (`Order`):** Flujo ágil que unifica la reserva de boletos y snacks en una sola transacción sin necesidad de pasarelas externas. Al confirmar la compra, el sistema procesa el pedido en una transacción ACID, calcula los totales y actualiza los estados al instante.
-* **Generación de Tickets en PDF y Códigos QR Dinámicos (`Ticket.qr_code`):** Integración con motores de renderizado de documentos y servicios SMTP. Al confirmar la orden, el sistema genera de manera automatizada un archivo PDF formal (comprobante de entrada) con el desglose de la orden, los asientos asignados y un código QR escaneable. Está disponible para descargalo directamente en la web.
+* **Notificaciones Automatizadas por Correo (Servicio SMTP):** Tras procesar la orden, el sistema envia un correo electrónico automático al cliente (configurado a través de un cliente SMTP con soporte TLS utilizando Gmail). Este correo funciona como un **comprobante formal de la transacción**, detallando el resumen de la compra y confirmando que los lugares han sido reservados con éxito.
+* **Generación de Tickets en PDF y Códigos QR en Web (`Ticket.qr_code`):** Integración con motores de renderizado de documentos directamente en la plataforma. La confirmación visual, el archivo PDF descargable y el código QR dinámico para el acceso a la sala **se generan exclusivamente en la interfaz de la página web** al finalizar el flujo, permitiendo al usuario guardarlos de manera inmediata.
 * **Sistema de Fidelización (`Customer`):** Extensión del modelo `User` nativo de Django para la automatización, acumulación y cálculo de puntos de lealtad (`loyalty_pts`) por cada orden confirmada.
 
 ### Administración Avanzada (Backoffice)
@@ -44,7 +45,7 @@ A continuación se muestra una demostración del flujo interactivo del sistema.
 
 | Flujo de Experiencia del Cliente |
 | :---: |
-| <table border="0" align="center"><tr><td align="center" valign="top" style="padding: 10px;"><b> Cartelera de Películas</b><br><br><img src="https://github.com/user-attachments/assets/f93e018e-d51d-4f88-be8a-aae30187cf1f" width="280"/></td><td align="center" valign="top" style="padding: 10px;"><b> Catálogo de snacks</b><br><br><img src="https://github.com/user-attachments/assets/3749f884-fdd1-4f39-9fc3-da2e6ac0a626" width="280"/></td><td align="center" valign="top" style="padding: 10px;"><b> Selección de asientos</b><br><br><img src="https://github.com/user-attachments/assets/2327c77d-dd99-4f0d-9e7c-da120c4d553e" width="280"/></td></tr></table> |
+| <table border="0" align="center"><tr><td align="center" valign="top" style="padding: 10px;"><b> Cartelera de Películas</b><br><br><img src="https://github.com/user-attachments/assets/f93e018e-d51d-4f88-be8a-aae30187cf1f" width="280"/></td><td align="center" valign="top" style="padding: 10px;"><b> Catálogo de Snacks</b><br><br><img src="https://github.com/user-attachments/assets/3749f884-fdd1-4f39-9fc3-da2e6ac0a626" width="280"/></td><td align="center" valign="top" style="padding: 10px;"><b> Selección de Asientos</b><br><br><img src="https://github.com/user-attachments/assets/2327c77d-dd99-4f0d-9e7c-da120c4d553e" width="280"/></td></tr></table> |
 
 ## Stack Tecnológico
 
