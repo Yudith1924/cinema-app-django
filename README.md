@@ -39,12 +39,12 @@ A continuación se muestra una demostración del flujo interactivo del sistema.
 
 | Comprobante PDF de Entrada (Con QR) | Back Administrativo (Jazzmin) |
 | :---: | :---: |
-| <img src="https://github.com/user-attachments/assets/fdd7f344-f934-4c01-a2a9-5afaeaf77e16" width="100%" max-width="450"/> | <img src="https://github.com/user-attachments/assets/f7e6f3e6-f4f0-4b66-8a43-d8084296e5aa" width="100%" max-height="300" style="object-fit: contain;"/> |
+| <img src="https://github.com/user-attachments/assets/fdd7f344-f934-4c01-a2a9-5afaeaf77e16" width="380" /> | <img src="https://github.com/user-attachments/assets/f7e6f3e6-f4f0-4b66-8a43-d8084296e5aa" width="480" /> |
 
 
 | Flujo de Experiencia del Cliente |
 | :---: |
-| <table border="0" align="center"><tr><td align="center" valign="top" style="padding: 10px;"><b>🎬 Cartelera de Películas</b><br><br><img src="https://github.com/user-attachments/assets/f93e018e-d51d-4f88-be8a-aae30187cf1f" width="280"/></td><td align="center" valign="top" style="padding: 10px;"><b>💺 Selección de Asientos</b><br><br><img src="https://github.com/user-attachments/assets/3749f884-fdd1-4f39-9fc3-da2e6ac0a626" width="280"/></td><td align="center" valign="top" style="padding: 10px;"><b>🍿 Catálogo de Dulcería</b><br><br><img src="https://github.com/user-attachments/assets/2327c77d-dd99-4f0d-9e7c-da120c4d553e" width="280"/></td></tr></table> |
+| <table border="0" align="center"><tr><td align="center" valign="top" style="padding: 10px;"><b> Cartelera de Películas</b><br><br><img src="https://github.com/user-attachments/assets/f93e018e-d51d-4f88-be8a-aae30187cf1f" width="280"/></td><td align="center" valign="top" style="padding: 10px;"><b> Catálogo de snacks</b><br><br><img src="https://github.com/user-attachments/assets/3749f884-fdd1-4f39-9fc3-da2e6ac0a626" width="280"/></td><td align="center" valign="top" style="padding: 10px;"><b> Selección de asientos</b><br><br><img src="https://github.com/user-attachments/assets/2327c77d-dd99-4f0d-9e7c-da120c4d553e" width="280"/></td></tr></table> |
 
 ## Stack Tecnológico
 
