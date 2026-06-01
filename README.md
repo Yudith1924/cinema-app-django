@@ -49,7 +49,7 @@ Sistema desarrollado para la administración de complejos cinematográficos, aut
 Sigue estos pasos para inicializar el entorno de desarrollo:
 
 1. **Clonar el repositorio:**
-   ```bash
+```bash
    git clone [https://github.com/Yudith1924/django-cinema-app.git](https://github.com/Yudith1924/django-cinema-app.git)
    cd django-cinema-app
 
