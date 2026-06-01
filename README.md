@@ -102,5 +102,5 @@ python manage.py runserver
 * **UI:** Jazzmin Admin Theme
 * **Servicios:** SMTP Client (TLS)
 
-```
+
 
